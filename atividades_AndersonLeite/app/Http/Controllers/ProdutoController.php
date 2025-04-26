@@ -11,7 +11,17 @@ class ProdutoController extends Controller
     public function index(){
        $this->produto = new Produto();
        //return response()->json($this->produto->all());
-       return view('produtos', ['produtos' => $this->produto->all()]);  
+       return view('produtos', ['produtos' => $this->produto->all()]);
+    }
+
+    public function show($id){
+        $produto = Produto::find($id);
+
+        if (!$produto) {
+            return view('produto', ['produto' => null]);
+        }
+
+        return view('produto', ['produto' => $produto]);
     }
 }
 
