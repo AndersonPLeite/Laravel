@@ -1,0 +1,16 @@
+cd example-app
+npm install && npm run build
+composer run dev
+
+criar projeto// composer create-project --prefer-dist laravel/laravel "nome do projeto"
+php artisan serve --port=8082
+criar controlador// php artisan make:controller HomeController
+
+*rotas chamam controladores que acessam determinados modelos
+
+
+criar model e migration// php artisan make:model Produto -mc
+
+configurar .env
+cirar tabelas// php artisan migrate:install
+atualizar variaveis de ambiente// php artisan migrate:fresh
