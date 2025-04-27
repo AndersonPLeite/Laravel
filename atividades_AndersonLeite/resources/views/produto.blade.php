@@ -28,12 +28,20 @@
                 <td>{{ $produto->qtd_estoque }}</td>
                 <td>{{ $produto->preco }}</td>
                 <td>{{ $produto->importado ? 'Sim' : 'Não' }}</td>
+                <td>
+                    <a href="/produtos">Voltar para a lista de produtos</a>
+                    <a href="{{ route('produto.edit', $produto->id) }}">Editar</a>
+                    <form action="{{ route('produto.delete', $produto->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Excluir</button>
+                </td>
             </tr>
         </tbody>
     </table>
     @else
     <p>Produto não encontrado!</p>
     @endif
-    <a href="/produtos">Voltar para a lista de produtos</a>
+
 </body>
 </html>

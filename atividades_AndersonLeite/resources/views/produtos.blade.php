@@ -27,6 +27,7 @@
                 <td>{{$produto->qtd_estoque}}</td>
                 <td>{{$produto->preco}}</td>
                 <td>{{($produto->importado)?'Sim':'Não'}}</td>
+                <td><a href="{{ route('produtos.edit', $produto->id) }}">Editar</a></td>
             </tr>
             @endforeach
         </tbody>
