@@ -8,10 +8,12 @@ use App\Models\Produto;
 class ProdutoController extends Controller
 {
     private $produto;
-    public function index(){
-       $this->produto = new Produto();
-       //return response()->json($this->produto->all());
-       return view('produtos', ['produtos' => $this->produto->all()]);
+
+
+    public function index()
+    {
+    $produtos = Produto::all();
+    return view('produtos', ['produtos' => $produtos]);
     }
 
     public function show($id){
