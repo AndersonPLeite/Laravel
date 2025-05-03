@@ -32,52 +32,48 @@ class ProdutoController extends Controller
 
     public function store(Request $request){
       $newProduto = $request->all();
-      $newProduto['importado'] = ($request->importado('importado') ? 1 : 0);
-      if(Produto::create($newProduto)){
-        return redirect()->route('produtos');
-      }else{
-        return redirect()->route('produtos')->with('error', 'Erro ao cadastrar produto');
-      }
+      $newProduto['importado'] = $request->has('importado') ? 1 : 0;
+
+        if (Produto::create($newProduto)) {
+       return redirect('/produtos');
+        }else{
+            dd("Erro ao cadastrar produto");
+        }
     }
 
-
     public function edit($id){
-        $produto = Produto::find($id);
-        if (!$produto) {
-            return redirect()->route('produtos')->with('error', 'Produto não encontrado');
-        }
-
-        return view('produto_edit', ['produto' => Produto::find($id)]);
+       $data = ['produto' => Produto::find($id)];
+       return view('produto_edit', $data);
     }
 
     public function update(Request $request, $id){
-        $produto = Produto::find($id);
-        if (!$produto) {
-            return redirect()->route('produtos')->with('error', 'Produto não encontrado');
-        }
+       $updateProduto = $request->all();
+         $updateProduto['importado'] = $request->has('importado') ? 1 : 0;
 
-        $produto->update($request->all());
-        return redirect()->route('produtos')->with('success', 'Produto atualizado com sucesso');
+          $produto = Produto::find($id);
+          if (!$produto) {
+                return redirect()->route('produtos')->with('error', 'Produto não encontrado');
+          }
+
+          $produto->update($updateProduto);
+          return redirect()->route('produtos')->with('success', 'Produto atualizado com sucesso');
     }
-
+    
     public function delete($id){
-        $produto = Produto::find($id);
-        if (!$produto) {
-            return redirect()->route('produtos')->with('error', 'Produto não encontrado');
-        }
-
-        $produto->delete();
-        return redirect()->route('produtos')->with('success', 'Produto deletado com sucesso');
+      return view('produtos.remove',[
+       'produto' => Produto::find($id)
+      ]);
     }
+
     public function remove(Request $request, $id){
-        $produto = Produto::find($id);
-        if (!$produto) {
-            return redirect()->route('produtos')->with('error', 'Produto não encontrado');
+       if($request->confirmar==="Deletar")
+        if(!Produto::destroy($id))
+            dd("Erro ao deletar produto $id");
+        else{
+            return redirect('/produtos');
         }
-
-        $produto->delete();
-        return redirect()->route('produtos')->with('success', 'Produto deletado com sucesso');
     }
+
 }
 
 

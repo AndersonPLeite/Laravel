@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
             $table->text('nome');
-            $table->text('descricao');
+            $table->text('descricao')->nullable();
             $table->integer('qtd_estoque');
             $table->float('preco', 10, 2);
             $table->boolean('importado')->default(false);

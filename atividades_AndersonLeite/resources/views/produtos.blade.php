@@ -28,6 +28,9 @@
                 <td>{{$produto->preco}}</td>
                 <td>{{($produto->importado)?'Sim':'Não'}}</td>
                 <td><a href="{{ route('produto.edit', $produto->id) }}">Editar</a></td>
+                <td>
+                    <a href="{{ route('delete', $produto->id) }}" title='Deletar'>&#128465</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

@@ -29,7 +29,7 @@
                 <td>{{ $produto->preco }}</td>
                 <td>{{ $produto->importado ? 'Sim' : 'Não' }}</td>
                 <td>
-                    <a href="/produtos">Voltar para a lista de produtos</a>
+
                     <a href="{{ route('produto.edit', $produto->id) }}">Editar</a>
                     <form action="{{ route('produto.delete', $produto->id) }}" method="POST" style="display:inline;">
                         @csrf
@@ -38,7 +38,9 @@
                 </td>
             </tr>
         </tbody>
+
     </table>
+    <button><a href="/produtos">Voltar para a lista de produtos</a></button>
     @else
     <p>Produto não encontrado!</p>
     @endif
